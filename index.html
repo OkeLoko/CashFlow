@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Finanzas</title>
+    <link rel="stylesheet" href="finances.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora de Finanzas</h1>
+
+        <label for="debo">Debo:</label>
+        <input type="text" id="debo" name="debo"><br>
+        
+        <label for="gastos">Gastos:</label>
+        <input type="text" id="gastos" name="gastos"><br>
+
+        <label for="tengo">Tengo:</label>
+        <input type="text" id="tengo" name="tengo"><br>
+
+        <label for="recibire">Recibiré:</label>
+        <input type="text" id="recibire" name="recibire"><br>
+
+        <label for="me_deben">Me deben:</label>
+        <input type="text" id="me_deben" name="me_deben"><br>
+
+        <label for="empece_con">Empecé con:</label>
+        <input type="text" id="empece_con" name="empece_con"><br><br>
+
+        <label for="startDate">Fecha de Inicio:</label>
+        <input type="date" id="startDate" name="startDate"><br><br>
+
+        <button id="calculate">Calcular</button><br><br>
+
+        <label for="terminare_con">Terminaré con:</label>
+        <input type="text" id="terminare_con" name="terminare_con" readonly><br>
+        
+        <label for="dineroGastos">Dinero Despues de Gastos</label>
+        <input type="text" id="dineroGastos" name="dineroGastos" readonly><br>
+
+        <label for="finalAmount">Final (con CETES):</label>
+        <input type="text" id="finalAmount" name="finalAmount" readonly><br>
+
+        <label for="incremento">Incremento:</label>
+        <input type="text" id="incremento" name="incremento" readonly><br>
+
+        <label for="porcentaje">Porcentaje:</label>
+        <input type="text" id="porcentaje" name="porcentaje" readonly><br>
+        
+        <label for="dineroConDeudas">Dinero que tendría si te pagan todas las deudas:</label>
+        <input type="text" id="dineroConDeudas" name="dineroConDeudas" readonly><br>
+
+        <label for="dineroActual">Dinero Actual con Incremento del 13.5%:</label>
+        <input type="text" id="dineroActual" name="dineroActual" readonly><br><br>
+
+    </div>
+
+    <script src="finances.js"></script>
+</body>
+</html>
