@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("dineroActual").value = localStorage.getItem("dineroActual") || '';
         document.getElementById("gastos").value = localStorage.getItem("gastos") || '';
         document.getElementById("dineroGastos").value = localStorage.getItem("dineroGastos") || '';
+        document.getElementById("incrementoDiario").value = localStorage.getItem("incrementoDiario") ||'';
     }
 
     // Guardar valores calculados
@@ -33,6 +34,7 @@ document.addEventListener("DOMContentLoaded", function() {
         localStorage.setItem("dineroActual", document.getElementById("dineroActual").value);
         localStorage.setItem("gastos", document.getElementById("gastos").value);
         localStorage.setItem("dineroGastos", document.getElementById("dineroGastos").value);
+        localStorage.setItem("incrementoDiario", document.getElementById("incrementoDiario").value);
     }
 
     // Calcular valores financieros
@@ -44,6 +46,7 @@ document.addEventListener("DOMContentLoaded", function() {
         let empeceCon = parseFloat(eval(document.getElementById("empece_con").value) || 0);
         let gastos = parseFloat(eval(document.getElementById("gastos").value) || 0);
         let dineroGastos = parseFloat(eval(document.getElementById("dineroGastos").value) || 0);
+        let incrementoDiario = parseInt(eval(document.getElementById("incrementoDiario").value || 0));
         
 
         let sobran = tengo - debo + recibire;
@@ -65,6 +68,9 @@ document.addEventListener("DOMContentLoaded", function() {
         let dineroConDeudas = sobran + meDeben;
 
         let dineroActual = empeceCon + incremento;
+        
+        //Calculo de Incremento Diario
+        incrementoDiario = tengo * cetesDailyRate;
 
         //Dinero Despues de Gastos
         dineroGastos = dineroActual - gastos;
@@ -75,9 +81,12 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("dineroGastos").value = dineroGastos.toFixed(2);
         document.getElementById("finalAmount").value = finalAmount.toFixed(2);
         document.getElementById("incremento").value = incremento.toFixed(2);
+        document.getElementById("incrementoDiario").value = incrementoDiario.toFixed(2);
         document.getElementById("porcentaje").value = porcentaje.toFixed(2) + "%";
         document.getElementById("dineroConDeudas").value = dineroConDeudas.toFixed(2);
         document.getElementById("dineroActual").value = dineroActual.toFixed(2);
+
+
         
         // Guardar valores
         saveValues();
