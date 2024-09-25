@@ -16,6 +16,8 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("gastos").value = localStorage.getItem("gastos") || '';
         document.getElementById("dineroGastos").value = localStorage.getItem("dineroGastos") || '';
         document.getElementById("incrementoDiario").value = localStorage.getItem("incrementoDiario") || '';
+        
+        document.getElementById("incremento2").value = localStorage.getItem("incremento2") || '';
 
         loadNotes();  // Cargar notas al inicio
     }
@@ -37,6 +39,8 @@ document.addEventListener("DOMContentLoaded", function() {
         localStorage.setItem("gastos", document.getElementById("gastos").value);
         localStorage.setItem("dineroGastos", document.getElementById("dineroGastos").value);
         localStorage.setItem("incrementoDiario", document.getElementById("incrementoDiario").value);
+
+        localStorage.setItem("incremento2", document.getElementById("incremento2").value);
     }
 
     // Función para evaluar y calcular expresiones en los campos de entrada
@@ -76,9 +80,12 @@ document.addEventListener("DOMContentLoaded", function() {
         let porcentaje = ((finalAmount - empeceCon) / empeceCon) * 100;
         
         // Dinero con deudas y dinero después de gastos
-        let dineroConDeudas = meDeben + terminareCon;
+        let dineroConDeudas = meDeben + terminareCon - gastos;
         let dineroActual = empeceCon + incremento;
         let dineroGastos = terminareCon - gastos;
+
+        //Incremento de lo que Empece con lo que Terminare
+        let incremento2 = terminareCon - empeceCon;   
 
         // Actualizar campos en la interfaz
         document.getElementById("terminare_con").value = terminareCon.toFixed(2);
@@ -89,10 +96,13 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("porcentaje").value = porcentaje.toFixed(2) + "%";
         document.getElementById("dineroConDeudas").value = dineroConDeudas.toFixed(2);
         document.getElementById("dineroActual").value = dineroActual.toFixed(2);
+        
+        document.getElementById("incremento2").value = incremento2.toFixed(2);
 
         // Guardar valores
         saveValues();
     }
+    
 
     // Funciones para gestionar las notas
     function saveNote() {
