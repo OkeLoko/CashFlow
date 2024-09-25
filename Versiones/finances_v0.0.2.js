@@ -15,9 +15,7 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("dineroActual").value = localStorage.getItem("dineroActual") || '';
         document.getElementById("gastos").value = localStorage.getItem("gastos") || '';
         document.getElementById("dineroGastos").value = localStorage.getItem("dineroGastos") || '';
-        document.getElementById("incrementoDiario").value = localStorage.getItem("incrementoDiario") || '';
-
-        loadNotes();  // Cargar notas al inicio
+        document.getElementById("incrementoDiario").value = localStorage.getItem("incrementoDiario") ||'';
     }
 
     // Guardar valores calculados
@@ -39,24 +37,15 @@ document.addEventListener("DOMContentLoaded", function() {
         localStorage.setItem("incrementoDiario", document.getElementById("incrementoDiario").value);
     }
 
-    // Función para evaluar y calcular expresiones en los campos de entrada
-    function evaluateExpression(value) {
-        try {
-            return eval(value);  // Evalúa la expresión y devuelve el resultado
-        } catch (e) {
-            return 0;  // Si hay un error en la expresión, devolver 0
-        }
-    }
-
     // Calcular valores financieros
     function calculateFinances() {
-        let debo = parseFloat(evaluateExpression(document.getElementById("debo").value)) || 0;
-        let tengo = parseFloat(evaluateExpression(document.getElementById("tengo").value)) || 0;
-        let recibire = parseFloat(evaluateExpression(document.getElementById("recibire").value)) || 0;
-        let meDeben = parseFloat(evaluateExpression(document.getElementById("me_deben").value)) || 0;
-        let empeceCon = parseFloat(evaluateExpression(document.getElementById("empece_con").value)) || 0;
-        let gastos = parseFloat(evaluateExpression(document.getElementById("gastos").value)) || 0;
-        let incrementoDiario = parseFloat(evaluateExpression(document.getElementById("incrementoDiario").value)) || 0;
+        let debo = parseFloat(document.getElementById("debo").value) || 0;
+        let tengo = parseFloat(document.getElementById("tengo").value) || 0;
+        let recibire = parseFloat(document.getElementById("recibire").value) || 0;
+        let meDeben = parseFloat(document.getElementById("me_deben").value) || 0;
+        let empeceCon = parseFloat(document.getElementById("empece_con").value) || 0;
+        let gastos = parseFloat(document.getElementById("gastos").value) || 0;
+        let incrementoDiario = parseFloat(document.getElementById("incrementoDiario").value) || 0;
         
         // Cálculo de terminareCon
         let terminareCon = tengo + recibire - debo;
@@ -94,50 +83,8 @@ document.addEventListener("DOMContentLoaded", function() {
         saveValues();
     }
 
-    // Funciones para gestionar las notas
-    function saveNote() {
-        let noteContent = document.getElementById("noteContent").value;
-        if (noteContent) {
-            let notes = JSON.parse(localStorage.getItem("notes")) || [];
-            notes.push(noteContent);
-            localStorage.setItem("notes", JSON.stringify(notes));
-            document.getElementById("noteContent").value = '';  // Limpiar textarea
-            loadNotes();  // Recargar lista de notas
-        }
-    }
-
-    function loadNotes() {
-        let notes = JSON.parse(localStorage.getItem("notes")) || [];
-        let notesList = document.getElementById("notesList");
-        notesList.innerHTML = '';  // Limpiar lista actual
-        notes.forEach((note, index) => {
-            let li = document.createElement("li");
-            li.textContent = note;
-
-            // Añadir botón de eliminar con imagen de basurero
-            let deleteButton = document.createElement("img");
-            deleteButton.src = "https://cdn-icons-png.flaticon.com/512/1214/1214428.png";  // Imagen de basurero
-            deleteButton.className = "trash-icon";
-            deleteButton.addEventListener("click", function() {
-                deleteNote(index);  // Llamar a la función para eliminar nota
-            });
-
-            li.appendChild(deleteButton);
-            notesList.appendChild(li);
-        });
-    }
-
-    function deleteNote(index) {
-        let notes = JSON.parse(localStorage.getItem("notes")) || [];
-        notes.splice(index, 1);  // Eliminar la nota en la posición indicada
-        localStorage.setItem("notes", JSON.stringify(notes));  // Guardar notas actualizadas
-        loadNotes();  // Recargar lista de notas
-    }
-
     // Eventos
     document.getElementById("calculate").addEventListener("click", calculateFinances);
-    document.getElementById("saveNote").addEventListener("click", saveNote);
-
-    // Cargar valores y notas al inicio
+    // Cargar valores al inicio
     loadSavedValues();
 });
